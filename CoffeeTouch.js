@@ -120,20 +120,20 @@
     return GenericState;
   })();
   NoTouch = (function() {
-    __extends(NoTouch, GenericState);
     function NoTouch() {
       NoTouch.__super__.constructor.apply(this, arguments);
     }
+    __extends(NoTouch, GenericState);
     NoTouch.prototype.touchstart = function() {
       return this.machine.setState(new FirstTouch(this.machine));
     };
     return NoTouch;
   })();
   FirstTouch = (function() {
-    __extends(FirstTouch, GenericState);
     function FirstTouch() {
       FirstTouch.__super__.constructor.apply(this, arguments);
     }
+    __extends(FirstTouch, GenericState);
     FirstTouch.prototype.init = function() {
       var _machine;
       _machine = this.machine;
@@ -154,10 +154,10 @@
     return FirstTouch;
   })();
   Fixed = (function() {
-    __extends(Fixed, GenericState);
     function Fixed() {
       Fixed.__super__.constructor.apply(this, arguments);
     }
+    __extends(Fixed, GenericState);
     Fixed.prototype.init = function() {
       return this.notify("fixed");
     };
@@ -168,10 +168,10 @@
     return Fixed;
   })();
   Drag = (function() {
-    __extends(Drag, GenericState);
     function Drag() {
       Drag.__super__.constructor.apply(this, arguments);
     }
+    __extends(Drag, GenericState);
     Drag.prototype.init = function() {
       var that;
       this.isTap = true;
@@ -213,7 +213,7 @@
       this.params.startX = eventObj.clientX;
       this.params.startY = eventObj.clientY;
       this.params.timeStart = date.getTime();
-      this.params.timeElasped = 0;
+      this.params.timeElapsed = 0;
       this.params.panX = 0;
       this.params.panY = 0;
       this.params.gestureName = this.gestureName;
@@ -232,7 +232,7 @@
         y: eventObj.clientY,
         time: date.getTime()
       };
-      this.params.timeElasped = date.getTime() - this.params.timeStart;
+      this.params.timeElapsed = date.getTime() - this.params.timeStart;
       this.updatePosition(eventObj);
       if (this.gestureName === "drag") {
         movedX = this.params.x - this.positions[this.positionCount - 1].x;
@@ -241,7 +241,7 @@
         this.params.dragDirection = getDragDirection(this);
       }
       if (this.gestureName === "dragend") {
-        if (this.params.speed > 0.5 || this.params.timeElasped < 100) {
+        if (this.params.speed > 0.5 || this.params.timeElapsed < 100) {
           return this.isFlick = true;
         }
       }
@@ -444,7 +444,7 @@
       this.informations.rotation = this.eventObj.global.rotation;
       this.informations.scale = this.eventObj.global.scale;
       date = new Date();
-      this.informations.timeElasped = date.getTime() - this.informations.timeStart;
+      this.informations.timeElapsed = date.getTime() - this.informations.timeStart;
       if (this.fingersArray[fingerID] != null) {
         this.fingersArray[fingerID].update(gestureName, this.eventObj);
       } else {
@@ -512,10 +512,17 @@
       }
     };
     Analyser.prototype.triggerPinchOrSpread = function() {
-      if (this.informations.scale < 1.1) {
+      var finger, sameDirection, _i, _len, _ref;
+      sameDirection = false;
+      _ref = this.fingers;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        finger = _ref[_i];
+        alert(finger.params.dragDirection);
+      }
+      if (this.informations.scale < 1.1 && !sameDirection) {
         this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":pinch", this.informations);
         return this.targetElement.trigger("pinch", this.informations);
-      } else if (this.informations.scale > 1.1) {
+      } else if (this.informations.scale > 1.1 && !sameDirection) {
         this.targetElement.trigger("" + (digit_name(this.fingers.length)) + ":spread", this.informations);
         return this.targetElement.trigger("spread", this.informations);
       }

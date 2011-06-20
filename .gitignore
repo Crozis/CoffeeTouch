@@ -1,1 +1,3 @@
-CoffeeTouch.js
+.DS_Store
+*.js
+!CoffeeTouch.js
