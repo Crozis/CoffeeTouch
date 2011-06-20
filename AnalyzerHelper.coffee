@@ -24,14 +24,18 @@
 ## WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
 ## IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# OK
 Object.swap = (obj1, obj2) ->
 	temp = obj2
 	obj2 = obj1
 	obj1 = obj2
 
+# OK
 distanceBetweenTwoPoints = (x1, y1, x2, y2) -> 
 	Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)))
 
+# COMMENT: Si on a une diagonale (deltaX == deltaY et != 0) le comportement est à préciser dans la doc de la fonction.
+#          On peut envisager d'ailleurs trois quadrant pour le déplacement plutôt que deux : horizontal, diagonal et vertical... Si cela apporte quelquechose.
 getDirection = (deltaX, deltaY) ->
 	if deltaX == deltaY == 0
 		return "unknown"
@@ -41,11 +45,15 @@ getDirection = (deltaX, deltaY) ->
 	else
 		if deltaY < 0 then "up" else "down"
 
+
+# OK
 getDragDirection = (finger) ->
 	deltaX = finger.params.x - finger.positions[finger.positionCount - 1].x
 	deltaY = finger.params.y - finger.positions[finger.positionCount - 1].y
 	getDirection deltaX, deltaY	
 
+# COMMENT:  Pensez à systématiquement commenter ce type de fermetures même simple, peu de developpeurs on l'habitude de lire des fermetures 
+#           comme cela et peuvent se demander ce que fait vraiment cette fonction même si cela a l'air simple. 
 digit_name = (->
 	names = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 	(n) -> 
