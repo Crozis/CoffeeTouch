@@ -30,6 +30,8 @@
 ## IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 class FingerGesture
+  
+  # OK
 	constructor: (@fingerId, @gestureName, eventObj) ->
 		date = new Date()
 		@params = {}
@@ -51,6 +53,8 @@ class FingerGesture
 		@params.dragDirection = "unknown"
 		@isFlick = false
 
+  # COMMENT: La vitesse définissant un flick ne DOIT pas être aussi profonde dans le code. Il faut qu'une personne exterieure puisse facilement la modifier
+  #          en fonction de ses usages/experiences.
 	update: (@gestureName, eventObj) ->
 		@positionCount++
 		date = new Date()
@@ -69,8 +73,9 @@ class FingerGesture
 			if @params.speed > 0.5 or @params.timeElapsed < 100
 				@isFlick = true
 
+  # OK. J'ai aligné les '=' pour une présentation plus propre... Je suis assez maniaque de ce côté et il vaut mieux l'apprendre maintenant :)
 	updatePosition: (eventObj) ->
-		@params.x = eventObj.clientX
-		@params.y = eventObj.clientY
+		@params.x    = eventObj.clientX
+		@params.y    = eventObj.clientY
 		@params.panX = @params.x - @params.startX
 		@params.panY = @params.y - @params.startY
