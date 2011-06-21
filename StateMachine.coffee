@@ -26,7 +26,8 @@
 ## WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
 ## IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
+## The role of StateMachine is to detect and communicate basics events made ​​by each finger independently, and whose composition will allow us to obtain complex events. So there are many state machine as there are fingers on the screen. 
+## All the following classes correspond to states of the automaton. And in all classes, 'touchstart', 'touchmove' and 'touchend' correspond to transitions of the automaton.
 class StateMachine
 	constructor: (@identifier, @router)-> 
 		@currentState = new NoTouch(this)
@@ -37,10 +38,8 @@ class StateMachine
 	setState: (newState) -> @currentState = newState
 	getState: -> @currentState
 	
-	
-
 class GenericState
-	init: -> # Defined par les sous classes
+	init: -> # Defined by subclasses
 
 	constructor: (@machine) ->
 		@eventObj = if @machine.currentState? then @machine.currentState.eventObj else {}
@@ -50,19 +49,15 @@ class GenericState
 		Object.merge(@eventObj, arg)
 		this[eventName]()
 
-	touchstart: -> #throw "undefined"
-	touchmove: -> #throw "undefined"
-	touchend: -> #throw "undefined"
-
-	notify: (name) ->
+	notify: (name) -> ## This method notifies events to the router
 		@machine.router.broadcast(name, @eventObj)	
 
-
+## Represents the initial state of the automaton.
 class NoTouch extends GenericState
 	touchstart: ->
-		@machine.setState(new FirstTouch @machine)
+		@machine.setState(new FirstTouch @machine) ## Makes a transition to 'FirstTouch' state during an event 'touchstart'
 
-
+## Represents the first state of the automata after a touch on the screen.
 class FirstTouch extends GenericState
 	init: ->
 		_machine = @machine
@@ -71,12 +66,12 @@ class FirstTouch extends GenericState
 	touchend: ->
 		clearTimeout @fixedtimer
 		@notify "tap"
-		@machine.setState new NoTouch @machine
+		@machine.setState new NoTouch @machine ## Makes a transition to 'NoTouch' state during an event 'touchend'
 
 	touchmove: ->
 		clearTimeout @fixedtimer
 		@notify "drag"
-		@machine.setState new Drag @machine
+		@machine.setState new Drag @machine ## Makes a transition to 'Drag' state during an event 'touchmove'
 
 		
 class Fixed extends GenericState
@@ -85,14 +80,14 @@ class Fixed extends GenericState
 
 	touchend: ->
 		@notify "fixedend"
-		@machine.setState new NoTouch @machine
+		@machine.setState new NoTouch @machine ## Makes a transition to 'NoTouch' state during an event 'touchend'
 
 
 class Drag extends GenericState
 	init: ->
 		@isTap = true
-		@initialX = @eventObj.clientX
-		@initialY = @eventObj.clientY	
+		@initialX = @eventObj.clientX ## Represent the initial position of the finger on the x-axis  
+		@initialY = @eventObj.clientY ## Represent the initial position of the finger on the x-axis  
 		@delta = 15
 		that = this		
 		setTimeout (-> that.isTap = false), 150
@@ -105,4 +100,4 @@ class Drag extends GenericState
 			@notify "tap"
 		else
 			@notify "dragend"
-		@machine.setState(new NoTouch @machine)
+		@machine.setState(new NoTouch @machine) ## Makes a transition to 'NoTouch' state during an event 'touchend'

@@ -40,7 +40,7 @@ class Analyser
 		@fingerArraySize = 0
 		@informations.timeStart = date.getTime()
 		
-	## Notify the analyser of a gesture (gesture name, fingerId and parameters of new position etc)
+	## Notify the analyser of a gesture (gesture name, fingerId and parameters of new position and so on…)
 	notify: (fingerID, gestureName, @eventObj) ->
 		@informations.rotation = @eventObj.global.rotation 
 		@informations.scale = @eventObj.global.scale

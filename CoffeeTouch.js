@@ -111,9 +111,6 @@
       Object.merge(this.eventObj, arg);
       return this[eventName]();
     };
-    GenericState.prototype.touchstart = function() {};
-    GenericState.prototype.touchmove = function() {};
-    GenericState.prototype.touchend = function() {};
     GenericState.prototype.notify = function(name) {
       return this.machine.router.broadcast(name, this.eventObj);
     };
