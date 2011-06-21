@@ -29,4 +29,4 @@ Example:
 ### User's manual
 
 See wiki for a more complete documentation:
-https://github.com/Crozis/CoffeeTouch/wiki/CoffeeTouch---User's-Manual
+[User's Manual](https://github.com/Crozis/CoffeeTouch/wiki/CoffeeTouch---User's-Manual)
