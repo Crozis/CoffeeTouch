@@ -8,7 +8,7 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #4fa3a7;
+      background-color: #E5E5EE;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #000000;
     }
@@ -16,17 +16,20 @@
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #b05c58; margin-bottom: 3px; }
+    h1 { font-size: 3.8em; color: #A00; margin-bottom: 3px; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #b05c58; }
-    h3 { text-align: center; color: #b05c58; }
-    a { color: #b05c58; }
+    h2 { font-size: 1.5em; color: #A00; }
+    h3 { text-align: center; color: #A00; }
+    a { color: #A00; }
     .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
     .download { float: right; }
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+    pre {
+      word-wrap: break-word;
+    }
   </style>
 </head>
 
@@ -42,8 +45,7 @@
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="http://github.com/Crozis/CoffeeTouch">CoffeeTouch</a>
-      <span class="small">by <a href="http://github.com/Crozis">Crozis</a></span></h1>
+    <h1><a href="http://github.com/Crozis/CoffeeTouch">CoffeeTouch</a></h1>
 
     <div class="description">
       
@@ -57,14 +59,15 @@ If you just want to use the library, skip to the User's manual
 If you want to fork or improve the library: CoffeeScript is required
 
 To compile in javascript file:
-
+<pre>
 coffee -c -j CoffeeTouch MethodsHelper.coffee StateMachine.coffee Finger.coffee EventRouter.coffee AnalyzerHelper.coffee Analyzer.coffee
-
+</pre>
 Simple example
-
+<pre>
 document.getElementById("myElement").onGesture("tap", function (event){
     ... // Do something when a 'tap' on the DOM element called 'myElement' has been made.
 })
+</pre>
 Important
 
 If you want to bind to all events, the callback function will have two arguments:
@@ -72,33 +75,36 @@ If you want to bind to all events, the callback function will have two arguments
 first: name
 second: eventParam
 Example:
-
+<pre>
 document.getElementById("myElement").onGesture("all", function (name, event){
     ...
 })
+</pre>
 User's manual
 
 See wiki for a more complete documentation: https://github.com/Crozis/CoffeeTouch/wiki/CoffeeTouch---User's-Manual</p>
 <h2>License</h2>
-<p>  
-Copyright (c) 2011
-Publication date: 06/17/2011
- 	Pierre Corsini (pcorsini@polytech.unice.fr)
- 	Nicolas Dupont (npg.dupont@gmail.com)
- 	Nicolas Fernandez (fernande@polytech.unice.fr)
- 	Nima Izadi (nim.izadi@gmail.com)	
- 	And supervised by Raphaël Bellec (r.bellec@structure-computation.com)
-
+<p>
+Copyright (c) 2011<br/>
+Publication date: 06/17/2011<br/>
+ 	Pierre Corsini (pcorsini@polytech.unice.fr)<br/>
+ 	Nicolas Dupont (npg.dupont@gmail.com)<br/>
+ 	Nicolas Fernandez (fernande@polytech.unice.fr)<br/>
+ 	Nima Izadi (nim.izadi@gmail.com)<br/>	
+ 	And supervised by Raphaël Bellec (r.bellec@structure-computation.com)<br/>
+</p>
+<p>
 Permission is hereby granted, free of charge, to any person obtaining a 
 copy of this software and associated documentation files (the "Software"),
 to deal in the Software without restriction, including without limitation
 the rights to use, copy, modify, merge, publish, distribute, sublicense, 
 and/or sell copies of the Software, and to permit persons to whom the Software 
 is furnished to do so, subject to the following conditions:
-
+</p><p>
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
-
+</p>
+<p>
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
 OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
@@ -106,10 +112,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
 IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
 <h2>Authors</h2>
-<p>Nicolas Dupont (lowx512@gmail.com)<br/>Nicolas Fernandez (nic.fernand@gmail.com)<br/>Nima Izadi (nim.izadi@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Nicolas Dupont (lowx512@gmail.com)<br/>      </p>
-
+<p>Nicolas Dupont (lowx512@gmail.com)
+<br/>Nima Izadi (nim.izadi@gmail.com)<br/>Nicolas Fernandez (nic.fernand@gmail.com)<br/>Pierre Corsini (arthox.dev@gmail.com)
+</p>
 
     <h2>Download</h2>
     <p>
