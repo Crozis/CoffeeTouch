@@ -117,20 +117,20 @@
     return GenericState;
   })();
   NoTouch = (function() {
+    __extends(NoTouch, GenericState);
     function NoTouch() {
       NoTouch.__super__.constructor.apply(this, arguments);
     }
-    __extends(NoTouch, GenericState);
     NoTouch.prototype.touchstart = function() {
       return this.machine.setState(new FirstTouch(this.machine));
     };
     return NoTouch;
   })();
   FirstTouch = (function() {
+    __extends(FirstTouch, GenericState);
     function FirstTouch() {
       FirstTouch.__super__.constructor.apply(this, arguments);
     }
-    __extends(FirstTouch, GenericState);
     FirstTouch.prototype.init = function() {
       var _machine;
       _machine = this.machine;
@@ -151,10 +151,10 @@
     return FirstTouch;
   })();
   Fixed = (function() {
+    __extends(Fixed, GenericState);
     function Fixed() {
       Fixed.__super__.constructor.apply(this, arguments);
     }
-    __extends(Fixed, GenericState);
     Fixed.prototype.init = function() {
       return this.notify("fixed");
     };
@@ -165,10 +165,10 @@
     return Fixed;
   })();
   Drag = (function() {
+    __extends(Drag, GenericState);
     function Drag() {
       Drag.__super__.constructor.apply(this, arguments);
     }
-    __extends(Drag, GenericState);
     Drag.prototype.init = function() {
       var that;
       this.isTap = true;
@@ -323,7 +323,8 @@
       target.global = {};
       return target.global = {
         scale: event.scale,
-        rotation: event.rotation
+        rotation: event.rotation,
+        event: event
       };
     };
     EventRouter.prototype.broadcast = function(name, eventObj) {
@@ -440,6 +441,7 @@
       this.eventObj = eventObj;
       this.informations.rotation = this.eventObj.global.rotation;
       this.informations.scale = this.eventObj.global.scale;
+      this.informations.target = this.eventObj.global.event.targetTouches[0];
       date = new Date();
       this.informations.timeElapsed = date.getTime() - this.informations.timeStart;
       if (this.fingersArray[fingerID] != null) {
