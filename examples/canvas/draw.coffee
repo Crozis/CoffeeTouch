@@ -1,25 +1,29 @@
 window.onload = ->
 	$ = (element) ->
 		document.getElementById element
-		
+
 	canvas = $('canvas')
 	ctx = canvas.getContext("2d")
 	ctx.lineCap = "round"
 	ctx.lineJoin = "round"
 	firsttime = true
 
-	$('canvas').onGesture "tap", (params) ->
+	options =
+		preventDefault: true
+
+	$('canvas').onGesture("tap", (params) ->
 		selectPoint(params.fingers[0].x, params.fingers[0].y)
 		ctx.fillStyle = "rgba(0,0,0,1)"
 		ctx.beginPath()
 		ctx.arc(params.fingers[0].x, params.fingers[0].y, 3, 0, Math.PI * 2,true)
 		ctx.closePath()
 		ctx.fill()
+	, options)
 
-  # $('canvas').onGesture "all", (name, params) ->
+  # $('canvas').onGesture("all", (name, params) ->
   #     $('debug').innerHTML = name + '<br/>' +$('debug').innerHTML
-		
-	$('canvas').onGesture "tap,tap", (params) ->
+
+	$('canvas').onGesture("tap,tap", (params) ->
 		p1 = {
 			x: params.fingers[0].x,
 			y: params.fingers[0].y
@@ -29,56 +33,64 @@ window.onload = ->
 			y: params.fingers[1].y
 		}
 		addTwoPoint(p1,p2)
-	
-	$('canvas').onGesture "drag", (params) ->
+	, options)
+	$('canvas').onGesture("drag", (params) ->
 		if firsttime
 			dragStart(params)
 			firsttime = false
 		else dragging(params)
-		
-		
-	$('canvas').onGesture "dragend", (params) ->
+	, options)
+
+	$('canvas').onGesture("dragend", (params) ->
 		dragEnd(params)
 		firsttime = true
-		
-	$('canvas').onGesture "doubletap", (params) ->
+	, options)
+
+	$('canvas').onGesture("doubletap", (params) ->
 		add(params.fingers[0].x, params.fingers[0].y)
-		
-	$('canvas').onGesture "tap,tap,tap", (params) ->
+	, options)
+
+	$('canvas').onGesture("tap,tap,tap", (params) ->
 		validate()
-	
-	$('canvas').onGesture "three:flick:down", (params) ->
+	, options)
+
+	$('canvas').onGesture("three:flick:down", (params) ->
 		clear()
-	
-	$('canvas').onGesture "two:spread", (params) ->
-		changeRadiusSelection params.scale
+	, options)
 
-	$('canvas').onGesture "two:pinch", (params) ->
+	$('canvas').onGesture("two:spread", (params) ->
 		changeRadiusSelection params.scale
-	
-	$('canvas').onGesture "three:spread", (params) ->
-		changeRadius params.scale
+	, options)
 
-	$('canvas').onGesture "three:pinch", (params) ->
+	$('canvas').onGesture("two:pinch", (params) ->
+		changeRadiusSelection params.scale
+	, options)
+
+	$('canvas').onGesture("three:spread", (params) ->
 		changeRadius params.scale
+	, options)
+
+	$('canvas').onGesture("three:pinch", (params) ->
+		changeRadius params.scale
+	, options)
 
 	style = {}
 	allPoint = []
 	point = {}
 	allvalidatePoint = []
 	dPoint = {}
-	drag = null	
+	drag = null
 	style =
 		curve:
 			width: 4
 			color: "#333"
-			
+
 		cpline:
 			width: 1
 			color: "#C00"
 		point:
 			radius: 15
-			radiusSelected: 35 
+			radiusSelected: 35
 			width: 2
 			color: "#900"
 			colorSelected: "#AAA"
@@ -109,9 +121,9 @@ window.onload = ->
 		allPoint.push point2
 		##default styles
 		drawCanvas()
-		
+
 	drawCanvas = ->
-		ctx.clearRect(0, 0, canvas.width, canvas.height)			
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
 		for i in [0..allPoint.length - 1]
 			if allPoint[i] and allPoint[i].validate == false
 				if allPoint[i].p
@@ -173,7 +185,7 @@ window.onload = ->
 						drag = allPoint[value].cp
 						dPoint = e
 						return
-	
+
 	dragging = (event) ->
 		if drag?
 			e =
@@ -183,11 +195,11 @@ window.onload = ->
 			drag.y += e.y - dPoint.y
 			dPoint = e
 			drawCanvas()
-				
+
 	dragEnd = (e) ->
 		drag = null
 		drawCanvas()
-	
+
 	selectPoint = (x,y) ->
 		e =
 			x: x
@@ -215,11 +227,11 @@ window.onload = ->
 						dPoint = e
 						drawCanvas()
 						return
-			
+
 	clear = ->
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 		allPoint = []
-		
+
 	add = (x,y) ->
 		point =
 			p:
@@ -233,21 +245,21 @@ window.onload = ->
 			validate: false
 		allPoint.push(point)
 		drawCanvas()
-	
+
 	changeRadiusSelection = (scale) ->
 		s = style.point.radiusSelected * (if scale > 1 then 1.1 else 0.9)
 		if 25 < s < 80
 			style.point.radiusSelected = s
 		drawCanvas()
-	
+
 	changeRadius = (scale) ->
 		s = style.point.radius * (if scale > 1 then 1.1 else 0.9)
 		if 10 < s < 80
 			style.point.radius = s
 		drawCanvas()
-	
+
 	j = 0
-	
+
 	validate = ->
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 		for i in [0..allPoint.length - 1]
