@@ -1,370 +1,551 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset='utf-8'>
+    <meta charset='utf-8'>
 
-  <title>Crozis/CoffeeTouch @ GitHub</title>
+    <title>Crozis/CoffeeTouch @ GitHub</title>
 
-  <style type="text/css">
+    <style type="text/css">
     body {
-      margin-top: 1.0em;
-      background-color: #E5E5EE;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
+        margin-top: 1.0em;
+        background-color: #FEFEFE;
+        font-family: Helvetica, Arial, FreeSans, san-serif;
+        color: #000000;
     }
     #container {
-      margin: 0 auto;
-      width: 700px;
+        margin: 0 auto;
+        width: 700px;
     }
-    h1 { font-size: 3.8em; color: #A00; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #A00; }
-    h3 { text-align: center; color: #A00; }
-    a { color: #A00; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #D5D5DD; color: black; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
+    h1 {
+        font-size: 3.8em;
+        color: #A00;
+        margin-bottom: 3px;
+    }
+    h1 a {
+        text-decoration: none
+    }
+    h2 {
+        font-size: 1.5em;
+        color: #A00;
+    }
+    h3 {
+        color: #A00;
+    }
+    a {
+        color: #A00;
+    }
+    .description {
+        font-size: 1.2em;
+        margin-bottom: 30px;
+        margin-top: 30px;
+        font-style: italic;
+    }
+    .download {
+        float: right;
+    }
     pre {
-      word-wrap: break-word;
+        background: #D5D5DD;
+        color: black;
+        padding: 15px;
     }
-  </style>
+    hr {
+        border: 0;
+        width: 80%;
+        border-bottom: 1px solid #aaa
+    }
+    .footer {
+        text-align:center;
+        padding-top:30px;
+        font-style: italic;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+    </style>
 </head>
 
 <body>
-  <a href="http://github.com/Crozis/CoffeeTouch"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-<h1>
-<a name="coffeetouchjs" class="anchor" href="#coffeetouchjs"><span class="octicon octicon-link"></span></a>CoffeeTouch.js</h1>
-
-<p>CoffeeTouch.js is a multi-touch JavaScript library that allows you to create and handle easily your own multi touch gestures.</p>
-
-<p>The library defines a naming convention to describe all possible gestures and provides functions to handle them.</p>
-
-<h1>
-<a name="motivation" class="anchor" href="#motivation"><span class="octicon octicon-link"></span></a>Motivation</h1>
-
-<h3>
-<a name="hammerjs-scripty2" class="anchor" href="#hammerjs-scripty2"><span class="octicon octicon-link"></span></a><a href="http://eightmedia.github.com/hammer.js/">Hammer.js</a>, <a href="http://scripty2.com/">Scripty2</a>
-</h3>
-
-<p>All those libraries suffer from the same limitation: the developer can only listen to predefined events, not create his own ones.</p>
-
-<h1>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h1>
-
-<p>Include CoffeeTouch.js in your web page and you're done. jQuery is not required. The functions are added directly to the Element object.</p>
-
-<h2>
-<a name="listening-to-a-gesture" class="anchor" href="#listening-to-a-gesture"><span class="octicon octicon-link"></span></a>Listening to a gesture</h2>
-
-<div class="highlight highlight-JavaScript"><pre><span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">onGesture</span><span class="p">(</span><span class="s2">"tap,tap"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">){</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s2">"#whiteboard element has been taped with two fingers"</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<h2>
-<a name="naming-convention-to-describe-gestures" class="anchor" href="#naming-convention-to-describe-gestures"><span class="octicon octicon-link"></span></a>Naming convention to describe gestures</h2>
-
-<p>A gesture is composed of one or more actions.</p>
-
-<h3>
-<a name="action-names" class="anchor" href="#action-names"><span class="octicon octicon-link"></span></a>Action names</h3>
-
-<p>Here is an exhaustive list of all possible actions:</p>
-
-<h4>
-<a name="simple-actions" class="anchor" href="#simple-actions"><span class="octicon octicon-link"></span></a>Simple actions</h4>
-
-<p>With the following actions, you can construct gestures.</p>
-
-<ul>
-<li>
-<strong>Tap</strong>: when the user tap on the screen
-
-<ul>
-<li>
-<code>tap</code>: single tap</li>
-<li>
-<code>doubletap</code>: double tap, like a double click</li>
-</ul>
-</li>
-<li>
-<strong>Hold</strong>: when the user hold his fingers on the screen:
-
-<ul>
-<li>
-<code>fixed</code>: press and hold fingers on the screen</li>
-<li>
-<code>fixedend</code>: release fingers after holding them.</li>
-</ul>
-</li>
-<li>
-<strong>Drag</strong>: when the user move his fingers on the screen:
-
-<ul>
-<li>
-<code>drag</code>: any directional draging action</li>
-<li>
-<code>up</code>: draging fingers upwards</li>
-<li>
-<code>right</code>: draging fingers to the right</li>
-<li>
-<code>down</code>: draging fingers downwards</li>
-<li>
-<code>left</code>: draging fingers to the left</li>
-<li>
-<code>dragend</code>: draging finished (user remove fingers from the screen)</li>
-</ul>
-</li>
-</ul><h4>
-<a name="defined-gestures" class="anchor" href="#defined-gestures"><span class="octicon octicon-link"></span></a>Defined gestures</h4>
-
-<p>The following common gestures are already implemented.</p>
-
-<ul>
-<li>
-<strong>Pinch</strong>: when the user bring his fingers closer or spread them.
-
-<ul>
-<li>
-<code>pinch</code>: bring fingers closer</li>
-<li>
-<code>spread</code>: spread fingers</li>
-</ul>
-</li>
-<li>
-<strong>Flick</strong>: when the user drag quickly on the screen
-
-<ul>
-<li>
-<code>flick</code>: a quick drag</li>
-<li>
-<code>flick:direction</code>: flick in a particular direction (direction can be: <code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code>)</li>
-</ul>
-</li>
-<li>
-<strong>Rotation</strong>: when the user rotate his fingers
-
-<ul>
-<li>
-<code>rotate</code>: any rotation</li>
-<li>
-<code>rotate:cw</code>: clockwise rotation</li>
-<li>
-<code>rotate:ccw</code>: counterclockwise rotation</li>
-</ul>
-</li>
-</ul><h3>
-<a name="defining-a-gesture" class="anchor" href="#defining-a-gesture"><span class="octicon octicon-link"></span></a>Defining a gesture</h3>
-
-<p>Gesture names are action names separated by a coma. Every action are mapped to specific the fingers touching the screen. First action will be map to the first finger, etc. (see <a href="#fingers-order-convention">Fingers order convention</a> to understand how each finger is mapped to an action.). That way, you can compose any kind of gestures. Example: </p>
-
-<ul>
-<li>
-<code>up,up,up</code> means that three fingers are going upwards.</li>
-<li>
-<code>up,down,up</code> means that the first finger is going upwards, the second is going downwards, and the third going upwards.</li>
-</ul><p>For <code>pinch</code>, <code>spread</code> and <code>rotation</code>, you can specify the number of finger used by the user you can associate the number of fingers involved in the gesture. Ex.:</p>
-
-<ul>
-<li>
-<code>three:pinch</code>: pinch with three fingers</li>
-<li>
-<code>three:rotate</code>: rotate with three fingers</li>
-</ul><h3>
-<a name="fingers-order-convention" class="anchor" href="#fingers-order-convention"><span class="octicon octicon-link"></span></a>Fingers order convention</h3>
-
-<p>Fingers are ordered in the Western reading direction (<code>left</code> to <code>right</code>, <code>up</code> to <code>down</code>).</p>
-
-<p>If the gesture start horizontally, fingers will be ordered from left to right.</p>
-
-<p>If the gesture start vertically, fingers will be ordered from top to bottom.</p>
-
-<p>You can listen to gesture with more or less precision. If you listen a drag 
-gesture, every move of a finger will execute your callback function. But if you listen to a <code>left</code> gesture, your callback function will be execute only if the finger is moving to the left.</p>
-
-<p><strong>Notice that order is considered in the gesture name</strong></p>
-
-<h1>
-<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h1>
-
-<h2>
-<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
-
-<p>You can pass a hash of options for third parameter.</p>
-
-<p>The options are:</p>
-
-<ul>
-<li>
-<code>preventDefault</code> (default to <code>false</code>): prevent default behavior of browsers. For ex.: a double tap in iOS is a zoom, if preventDefault set to <code>true</code>, it won't zoom.</li>
-<li>
-<code>flickSpeed</code> (default to <code>0.5</code>): speed of the fingers movement to trigger the flick.</li>
-<li>
-<code>flickTimeElapsed</code> in ms (default to <code>100</code>): time elapsed between the moment the finger touch the screen and release from it.</li>
-</ul><h2>
-<a name="event-information-object" class="anchor" href="#event-information-object"><span class="octicon octicon-link"></span></a>Event information object</h2>
-
-<p>When the <code>onGesture</code> function is called, an <code>event</code> hash is passed as parameter.</p>
-
-<p><strong>event</strong>:</p>
-
-<ul>
-<li>
-<code>rotation</code>: rotation value in degrees</li>
-<li>
-<code>scale</code>: scale factor between fingers (only defined for gestures with two or more fingers)</li>
-<li>
-<code>nbFingers</code>: number of fingers for the gesture</li>
-<li>
-<code>timeStart</code>: time when the gesture started</li>
-<li>
-<code>timeElapsed</code>: time elapsed from the beginning of the gesture (in ms)</li>
-<li>
-<code>fingers[nbFingers]</code>: <em>Each finger has its own informations.</em>
-
-<ul>
-<li>
-<code>startX</code>: initial X position</li>
-<li>
-<code>startY</code>: initial Y position</li>
-<li>
-<code>x</code>: actual X position</li>
-<li>
-<code>y</code>: actual Y position</li>
-<li>
-<code>timeStart</code>: time when the finger has touched the screen</li>
-<li>
-<code>timeElapsed</code>: time elapsed from the beginning of the touch (in ms)</li>
-<li>
-<code>panX</code>: distance moved in X</li>
-<li>
-<code>panY</code>: distance moved in Y</li>
-<li>
-<code>speed</code>: speed of the finger</li>
-<li>
-<code>gestureName</code>: name of the gesture (<em>tap, doubletap, fixed or drag</em>)</li>
-<li>
-<code>dragDirection</code>: direction of the drag (if there is one) - <em>up, down, righ or left</em>
-</li>
-</ul>
-</li>
-</ul><h2>
-<a name="provided-function" class="anchor" href="#provided-function"><span class="octicon octicon-link"></span></a>Provided function</h2>
-
-<p>All functions are added to the Element’s prototype.</p>
-
-<p><strong>onGesture(gestureName, callbackFunction):</strong></p>
-
-<p>Bind a callback to the gestureName passed in parameter.</p>
-
-<div class="highlight highlight-JavaScript"><pre><span class="c1">// Listening to a `tap`</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">onGesture</span><span class="p">(</span><span class="s2">"tap"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"#whiteboard element has been taped with one finger"</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<p><strong>unbindGesture(gestureName, callbackFunction):</strong></p>
-
-<p>Remove the callback associated with the gestureName passed in parameter if it exists.</p>
-
-<div class="highlight highlight-JavaScript"><pre><span class="kd">var</span> <span class="nx">alertTap</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"I've been taped"</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">// Listen to tap</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">onGesture</span><span class="p">(</span><span class="s2">"tap"</span><span class="p">,</span> <span class="nx">alertTap</span><span class="p">);</span>
-<span class="c1">// When #whiteboard is taped, `alertTap` function is called.</span>
-
-<span class="c1">// Unbind `alertTap` function</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">unbindGesture</span><span class="p">(</span><span class="s2">"tap"</span><span class="p">,</span> <span class="nx">alertTap</span><span class="p">);</span>
-<span class="c1">// `alertTap` won't be called if #whiteboard is taped.</span>
-</pre></div>
-
-<p><strong>makeGesture(gestureName):</strong></p>
-
-<p>Execute the callback associated with the gestureName if a gesture has been associated before. Like <code>trigger</code> in jQuery. Can be used to simulate a gesture.</p>
-
-<div class="highlight highlight-JavaScript"><pre><span class="kd">var</span> <span class="nx">alertTap</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"I've been taped"</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="c1">// Listen to tap</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">onGesture</span><span class="p">(</span><span class="s2">"tap"</span><span class="p">,</span> <span class="nx">alertTap</span><span class="p">);</span>
-<span class="c1">// When #whiteboard is taped, `alertTap` function is called.</span>
-
-<span class="c1">// Unbind `alertTap` function</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">makeGesture</span><span class="p">(</span><span class="s2">"tap"</span><span class="p">);</span>
-<span class="c1">// `alertTap` is called</span>
-</pre></div>
-
-<h3>
-<a name="listening-to-all-events" class="anchor" href="#listening-to-all-events"><span class="octicon octicon-link"></span></a>Listening to all events</h3>
-
-<p>If you want to listen to all events, the callback function will be called with two arguments:</p>
-
-<ul>
-<li>first: name</li>
-<li>second: eventParam</li>
-</ul><p>Example:</p>
-
-<div class="highlight highlight-JavaScript"><pre><span class="c1">// Listening to a `tap`</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">onGesture</span><span class="p">(</span><span class="s2">"tap"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"#whiteboard element has been taped with one finger"</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="c1">// Listening to all events</span>
-<span class="nx">$</span><span class="p">(</span><span class="s2">"#whiteboard"</span><span class="p">).</span><span class="nx">onGesture</span><span class="p">(</span><span class="s2">"all"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">' has been made on #whiteboard element'</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<h1>
-<a name="dependencies" class="anchor" href="#dependencies"><span class="octicon octicon-link"></span></a>Dependencies</h1>
-
-<p>None. ;)</p>
-
-<h1>
-<a name="compatibilities" class="anchor" href="#compatibilities"><span class="octicon octicon-link"></span></a>Compatibilities</h1>
-
-<ul>
-<li>iOs</li>
-<li>Android 4.1+</li>
-</ul><h1>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h1>
-
-<p>Try it online with your multitouch device! <a href="https://github.com/Crozis/CoffeeTouch/wiki/Examples">Examples</a></p>
-
-<h1>
-<a name="issues" class="anchor" href="#issues"><span class="octicon octicon-link"></span></a>Issues</h1>
-
-<p>Discovered a bug? Please create an issue here on GitHub!</p>
-
-<p><a href="https://github.com/NicolasDupont/CoffeeTouch.js/issues">https://github.com/NicolasDupont/CoffeeTouch.js/issues</a></p>
-
-<h1>
-<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h1>
-
-<ul>
-<li><a href="http://ontherailsagain.com/authors/Nicolas">Nicolas Dupont</a></li>
-<li><a href="http://ontherailsagain.com/authors/Nima">Nima Izadi</a></li>
-</ul><h3>
-<a name="participated-in-creation" class="anchor" href="#participated-in-creation"><span class="octicon octicon-link"></span></a>Participated in creation</h3>
-
-<ul>
-<li>Raphaël Bellec</li>
-<li>Nicolas Fernandez</li>
-<li>Pierre Corsini</li>
-</ul><h1>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
-
-<p>The code for this software is distributed under the MIT License.</p>
-
-  </div>
-
-  
+    <a href="http://github.com/Crozis/CoffeeTouch">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+    </a>
+
+    <div id="container">
+
+        <h1></a>CoffeeTouch.js</h1>
+
+        <p>CoffeeTouch.js is a multi-touch JavaScript library that allows you to create and handle easily your own multi touch gestures.</p>
+
+        <p>The library defines a naming convention to describe all possible gestures and provides functions to handle them.</p>
+
+        <h2></a>Motivation</h2>
+
+        <h4></a><a href="http://eightmedia.github.com/hammer.js/">Hammer.js</a>, <a href="http://scripty2.com/">Scripty2</a>
+        </h4>
+
+        <p>All those libraries suffer from the same limitation: the developer can only listen to predefined events, not create his own ones.</p>
+
+        <h2></a>Getting Started</h2>
+
+        <p>Include CoffeeTouch.js in your web page and you're done. jQuery is not required. The functions are added directly to the Element object.</p>
+
+        <h3></a>Listening to a gesture</h3>
+
+        <div class="highlight highlight-JavaScript">
+            <pre>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">onGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap,tap"</span>
+                <span class="p">,</span>
+                <span class="kd">function</span>
+                <span class="p">(</span>
+                <span class="nx">event</span>
+                <span class="p">){</span>
+                <span class="nx">alert</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard element has been taped with two fingers"</span>
+                <span class="p">);</span>
+                <span class="p">});</span>
+            </pre>
+        </div>
+
+        <h3></a>Naming convention to describe gestures</h3>
+
+        <p>A gesture is composed of one or more actions.</p>
+
+        <h4></a>Action names</h4>
+
+        <p>Here is an exhaustive list of all possible actions:</p>
+
+        <h5></a>Simple actions</h5>
+
+        <p>With the following actions, you can construct gestures.</p>
+
+        <ul>
+            <li>
+                <strong>Tap</strong>: when the user tap on the screen
+
+                <ul>
+                    <li>
+                        <code>tap</code>: single tap</li>
+                    <li>
+                        <code>doubletap</code>: double tap, like a double click</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Hold</strong>: when the user hold his fingers on the screen:
+
+                <ul>
+                    <li>
+                        <code>fixed</code>: press and hold fingers on the screen</li>
+                    <li>
+                        <code>fixedend</code>: release fingers after holding them.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Drag</strong>: when the user move his fingers on the screen:
+
+                <ul>
+                    <li>
+                        <code>drag</code>: any directional draging action</li>
+                    <li>
+                        <code>up</code>: draging fingers upwards</li>
+                    <li>
+                        <code>right</code>: draging fingers to the right</li>
+                    <li>
+                        <code>down</code>: draging fingers downwards</li>
+                    <li>
+                        <code>left</code>: draging fingers to the left</li>
+                    <li>
+                        <code>dragend</code>: draging finished (user remove fingers from the screen)</li>
+                </ul>
+            </li>
+        </ul>
+        <h5></a>Defined gestures</h5>
+
+        <p>The following common gestures are already implemented.</p>
+
+        <ul>
+            <li>
+                <strong>Pinch</strong>: when the user bring his fingers closer or spread them.
+
+                <ul>
+                    <li>
+                        <code>pinch</code>: bring fingers closer</li>
+                    <li>
+                        <code>spread</code>: spread fingers</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Flick</strong>: when the user drag quickly on the screen
+
+                <ul>
+                    <li>
+                        <code>flick</code>: a quick drag</li>
+                    <li>
+                        <code>flick:direction</code>: flick in a particular direction (direction can be:
+                        <code>left</code>,
+                        <code>top</code>,
+                        <code>right</code>,
+                        <code>bottom</code>)</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Rotation</strong>: when the user rotate his fingers
+
+                <ul>
+                    <li>
+                        <code>rotate</code>: any rotation</li>
+                    <li>
+                        <code>rotate:cw</code>: clockwise rotation</li>
+                    <li>
+                        <code>rotate:ccw</code>: counterclockwise rotation</li>
+                </ul>
+            </li>
+        </ul>
+        <h4></a>Defining a gesture</h4>
+
+        <p>Gesture names are action names separated by a coma. Every action are mapped to specific the fingers touching the screen. First action will be map to the first finger, etc. (see <a href="#fingers-order-convention">Fingers order convention</a> to understand how each finger is mapped to an action.). That way, you can compose any kind of gestures. Example:</p>
+
+        <ul>
+            <li>
+                <code>up,up,up</code>means that three fingers are going upwards.</li>
+            <li>
+                <code>up,down,up</code>means that the first finger is going upwards, the second is going downwards, and the third going upwards.</li>
+        </ul>
+        <p>For
+            <code>pinch</code>,
+            <code>spread</code>and
+            <code>rotation</code>, you can specify the number of finger used by the user you can associate the number of fingers involved in the gesture. Ex.:</p>
+
+        <ul>
+            <li>
+                <code>three:pinch</code>: pinch with three fingers</li>
+            <li>
+                <code>three:rotate</code>: rotate with three fingers</li>
+        </ul>
+        <h4></a>Fingers order convention</h4>
+
+        <p>Fingers are ordered in the Western reading direction (
+            <code>left</code>to
+            <code>right</code>,
+            <code>up</code>to
+            <code>down</code>).</p>
+
+        <p>If the gesture start horizontally, fingers will be ordered from left to right.</p>
+
+        <p>If the gesture start vertically, fingers will be ordered from top to bottom.</p>
+
+        <p>You can listen to gesture with more or less precision. If you listen a drag gesture, every move of a finger will execute your callback function. But if you listen to a
+            <code>left</code>gesture, your callback function will be execute only if the finger is moving to the left.</p>
+
+        <p>
+            <strong>Notice that order is considered in the gesture name</strong>
+        </p>
+
+        <h2></a>Configuration</h2>
+
+        <h3></a>Options</h3>
+
+        <p>You can pass a hash of options for third parameter.</p>
+
+        <p>The options are:</p>
+
+        <ul>
+            <li>
+                <code>preventDefault</code>(default to
+                <code>false</code>): prevent default behavior of browsers. For ex.: a double tap in iOS is a zoom, if preventDefault set to
+                <code>true</code>, it won't zoom.</li>
+            <li>
+                <code>flickSpeed</code>(default to
+                <code>0.5</code>): speed of the fingers movement to trigger the flick.</li>
+            <li>
+                <code>flickTimeElapsed</code>in ms (default to
+                <code>100</code>): time elapsed between the moment the finger touch the screen and release from it.</li>
+        </ul>
+        <h3></a>Event information object</h3>
+
+        <p>When the
+            <code>onGesture</code>function is called, an
+            <code>event</code>hash is passed as parameter.</p>
+
+        <p>
+            <strong>event</strong>:</p>
+
+        <ul>
+            <li>
+                <code>rotation</code>: rotation value in degrees</li>
+            <li>
+                <code>scale</code>: scale factor between fingers (only defined for gestures with two or more fingers)</li>
+            <li>
+                <code>nbFingers</code>: number of fingers for the gesture</li>
+            <li>
+                <code>timeStart</code>: time when the gesture started</li>
+            <li>
+                <code>timeElapsed</code>: time elapsed from the beginning of the gesture (in ms)</li>
+            <li>
+                <code>fingers[nbFingers]</code>:
+                <em>Each finger has its own informations.</em>
+
+                <ul>
+                    <li>
+                        <code>startX</code>: initial X position</li>
+                    <li>
+                        <code>startY</code>: initial Y position</li>
+                    <li>
+                        <code>x</code>: actual X position</li>
+                    <li>
+                        <code>y</code>: actual Y position</li>
+                    <li>
+                        <code>timeStart</code>: time when the finger has touched the screen</li>
+                    <li>
+                        <code>timeElapsed</code>: time elapsed from the beginning of the touch (in ms)</li>
+                    <li>
+                        <code>panX</code>: distance moved in X</li>
+                    <li>
+                        <code>panY</code>: distance moved in Y</li>
+                    <li>
+                        <code>speed</code>: speed of the finger</li>
+                    <li>
+                        <code>gestureName</code>: name of the gesture (
+                        <em>tap, doubletap, fixed or drag</em>)</li>
+                    <li>
+                        <code>dragDirection</code>: direction of the drag (if there is one) -
+                        <em>up, down, righ or left</em>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <h3></a>Provided function</h3>
+
+        <p>All functions are added to the Element’s prototype.</p>
+
+        <p>
+            <strong>onGesture(gestureName, callbackFunction):</strong>
+        </p>
+
+        <p>Bind a callback to the gestureName passed in parameter.</p>
+
+        <div class="highlight highlight-JavaScript">
+            <pre>
+                <span class="c1">// Listening to a `tap`</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">onGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap"</span>
+                <span class="p">,</span>
+                <span class="kd">function</span>
+                <span class="p">(</span>
+                <span class="nx">event</span>
+                <span class="p">){</span>
+                <span class="nx">alert</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard element has been taped with one finger"</span>
+                <span class="p">);</span>
+                <span class="p">});</span>
+            </pre>
+        </div>
+
+        <p>
+            <strong>unbindGesture(gestureName, callbackFunction):</strong>
+        </p>
+
+        <p>Remove the callback associated with the gestureName passed in parameter if it exists.</p>
+
+        <div class="highlight highlight-JavaScript">
+            <pre>
+                <span class="kd">var</span>
+                <span class="nx">alertTap</span>
+                <span class="o">=</span>
+                <span class="kd">function</span>
+                <span class="p">()</span>
+                <span class="p">{</span>
+                <span class="nx">alert</span>
+                <span class="p">(</span>
+                <span class="s2">"I've been taped"</span>
+                <span class="p">);</span>
+                <span class="p">}</span>
+                <span class="c1">// Listen to tap</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">onGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap"</span>
+                <span class="p">,</span>
+                <span class="nx">alertTap</span>
+                <span class="p">);</span>
+                <span class="c1">// When #whiteboard is taped, `alertTap` function is called.</span>
+
+                <span class="c1">// Unbind `alertTap` function</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">unbindGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap"</span>
+                <span class="p">,</span>
+                <span class="nx">alertTap</span>
+                <span class="p">);</span>
+                <span class="c1">// `alertTap` won't be called if #whiteboard is taped.</span>
+            </pre>
+        </div>
+
+        <p>
+            <strong>makeGesture(gestureName):</strong>
+        </p>
+
+        <p>Execute the callback associated with the gestureName if a gesture has been associated before. Like
+            <code>trigger</code>in jQuery. Can be used to simulate a gesture.</p>
+
+        <div class="highlight highlight-JavaScript">
+            <pre>
+                <span class="kd">var</span>
+                <span class="nx">alertTap</span>
+                <span class="o">=</span>
+                <span class="kd">function</span>
+                <span class="p">()</span>
+                <span class="p">{</span>
+                <span class="nx">alert</span>
+                <span class="p">(</span>
+                <span class="s2">"I've been taped"</span>
+                <span class="p">);</span>
+                <span class="p">}</span>
+                <span class="c1">// Listen to tap</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">onGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap"</span>
+                <span class="p">,</span>
+                <span class="nx">alertTap</span>
+                <span class="p">);</span>
+                <span class="c1">// When #whiteboard is taped, `alertTap` function is called.</span>
+
+                <span class="c1">// Unbind `alertTap` function</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">makeGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap"</span>
+                <span class="p">);</span>
+                <span class="c1">// `alertTap` is called</span>
+            </pre>
+        </div>
+
+        <h4></a>Listening to all events</h4>
+
+        <p>If you want to listen to all events, the callback function will be called with two arguments:</p>
+
+        <ul>
+            <li>first: name</li>
+            <li>second: eventParam</li>
+        </ul>
+        <p>Example:</p>
+
+        <div class="highlight highlight-JavaScript">
+            <pre>
+                <span class="c1">// Listening to a `tap`</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">onGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"tap"</span>
+                <span class="p">,</span>
+                <span class="kd">function</span>
+                <span class="p">(</span>
+                <span class="nx">event</span>
+                <span class="p">){</span>
+                <span class="nx">alert</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard element has been taped with one finger"</span>
+                <span class="p">);</span>
+                <span class="p">});</span>
+
+                <span class="c1">// Listening to all events</span>
+                <span class="nx">$</span>
+                <span class="p">(</span>
+                <span class="s2">"#whiteboard"</span>
+                <span class="p">).</span>
+                <span class="nx">onGesture</span>
+                <span class="p">(</span>
+                <span class="s2">"all"</span>
+                <span class="p">,</span>
+                <span class="kd">function</span>
+                <span class="p">(</span>
+                <span class="nx">name</span>
+                <span class="p">,</span>
+                <span class="nx">event</span>
+                <span class="p">){</span>
+                <span class="nx">alert</span>
+                <span class="p">(</span>
+                <span class="nx">name</span>
+                <span class="o">+</span>
+                <span class="s1">' has been made on #whiteboard element'</span>
+                <span class="p">);</span>
+                <span class="p">});</span>
+            </pre>
+        </div>
+
+        <h2></a>Dependencies</h2>
+
+        <p>None. ;)</p>
+
+        <h2></a>Compatibilities</h2>
+
+        <ul>
+            <li>iOs</li>
+            <li>Android 4.1+</li>
+        </ul>
+        <h2></a>Examples</h2>
+
+        <p>Try it online with your multitouch device! <a href="https://github.com/Crozis/CoffeeTouch/wiki/Examples">Examples</a>
+        </p>
+
+        <h2></a>Issues</h2>
+
+        <p>Discovered a bug? Please create an issue here on GitHub!</p>
+
+        <p><a href="https://github.com/NicolasDupont/CoffeeTouch.js/issues">https://github.com/NicolasDupont/CoffeeTouch.js/issues</a>
+        </p>
+
+        <h2></a>Contributors</h2>
+
+        <ul>
+            <li><a href="http://ontherailsagain.com/authors/Nicolas">Nicolas Dupont</a>
+            </li>
+            <li><a href="http://ontherailsagain.com/authors/Nima">Nima Izadi</a>
+            </li>
+        </ul>
+        <h4></a>Participated in creation</h4>
+
+        <ul>
+            <li>Raphaël Bellec</li>
+            <li>Nicolas Fernandez</li>
+            <li>Pierre Corsini</li>
+        </ul>
+        <h2></a>License</h2>
+
+        <p>The code for this software is distributed under the MIT License.</p>
+
+    </div>
+
+
 </body>
+
 </html>
