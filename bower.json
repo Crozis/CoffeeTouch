@@ -1,0 +1,26 @@
+{
+  "name": "CoffeeTouch",
+  "version": "0.1.0",
+  "homepage": "https://github.com/NicolasDupont/CoffeeTouch",
+  "authors": [
+    "Nicolas Dupont <npg.dupont@gmail.com>",
+    "Nima Izadi <nima.izadi@gmail.com>"
+  ],
+  "main": "/build/CoffeeTouch",
+  "keywords": [
+    "multi-touch"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jasmine-jquery": "~2.0.3",
+    "jquery": "~2.1.0"
+  }
+}
