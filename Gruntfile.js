@@ -41,7 +41,12 @@ module.exports = function(grunt) {
 					'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
 				],
 				specs: 'spec/*Spec.js',
-				helpers: 'spec/*Helper.js'
+				helpers: 'spec/*Helper.js',
+				template: require('grunt-template-jasmine-istanbul'),
+					templateOptions: {
+						coverage: 'coverage/coverage.json',
+						report: 'coverage'
+					}
 			}
 		},
 		clean: ['tmp']
