@@ -1,4 +1,29 @@
 module.exports = function(grunt) {
+	var tmpFolderForJs	= 'compiled/',
+		filesToCompile	= {},
+		fileList		= [
+		'Analyzer',
+		'EventRouter',
+		'Finger',
+		'MethodsHelper',
+		'StateMachine',
+		'AnalyzerSpec',
+		'EventRouterSpec',
+		'FingerSpec',
+		'HelpersSpec',
+		'StateMachineSpec',
+		'SpecHelper'
+	];
+
+	fileList.forEach(function(file) {
+		var prefix = 'src/';
+		if (file.indexOf('Spec') != -1) {
+			prefix = 'spec/';
+		}
+
+		filesToCompile[tmpFolderForJs + prefix + file + '.js'] = prefix + file +'.coffee';
+	});
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -7,13 +32,7 @@ module.exports = function(grunt) {
 				options: {
 					bare: true
 				},
-				files: {
-					'tmp/Analyzer.js': ['src/Analyzer.coffee'],
-					'tmp/EventRouter.js': ['src/EventRouter.coffee'],
-					'tmp/Finger.js': ['src/Finger.coffee'],
-					'tmp/MethodsHelper.js': ['src/MethodsHelper.coffee'],
-					'tmp/StateMachine.js': ['src/StateMachine.coffee']
-				}
+				files: filesToCompile
 			},
 			compileJoined: {
 				options: {
@@ -34,14 +53,14 @@ module.exports = function(grunt) {
 			}
 		},
 		jasmine: {
-			src: 'tmp/*.js',
+			src: tmpFolderForJs + 'src/*.js',
 			options: {
 				vendor: [
 					'bower_components/jquery/dist/jquery.js',
 					'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
 				],
-				specs: 'spec/*Spec.js',
-				helpers: 'spec/*Helper.js',
+				specs: tmpFolderForJs + 'spec/*Spec.js',
+				helpers: tmpFolderForJs + 'spec/*Helper.js',
 				template: require('grunt-template-jasmine-istanbul'),
 					templateOptions: {
 						coverage: 'coverage/coverage.json',
@@ -49,7 +68,7 @@ module.exports = function(grunt) {
 					}
 			}
 		},
-		clean: ['tmp']
+		clean: [tmpFolderForJs]
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
