@@ -16,14 +16,15 @@ describe "Automaton", ->
     it "is defined", ->
       expect(GenericState).toBeDefined()
 
-    it "has a touchstart method", ->
-      expect(subject.touchstart).toBeDefined()
+    describe 'transitions', ->
+      it "has a touchstart method", ->
+        expect(subject.touchstart).toBeDefined()
 
-    it "has a touchend method", ->
-      expect(subject.touchend).toBeDefined()
+      it "has a touchend method", ->
+        expect(subject.touchend).toBeDefined()
 
-    it "has a touchmove method", ->
-      expect(subject.touchmove).toBeDefined()
+      it "has a touchmove method", ->
+        expect(subject.touchmove).toBeDefined()
 
   describe "NoTouch state", ->
     beforeEach ->
@@ -178,6 +179,3 @@ describe "Automaton", ->
   describe "StateMachine", ->
     it "is defined", ->
       expect(StateMachine).toBeDefined()
-
-
-
